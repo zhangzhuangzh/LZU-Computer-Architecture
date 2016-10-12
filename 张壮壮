@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+#include<time.h>
+#include <malloc.h>
+#include <math.h>
+
+
+#define bool int
+#define true 1
+#define false 0
+
+
+int get( int x, int n)
+{
+	int i;
+	for(i = 0; i < n; i++)
+	{
+		x /=10;
+	}
+	return x%10;
+}
+
+int getlength(int x)
+{
+	int i = 0;
+	while(x != 0)
+	{
+		x /=10;
+		i++;
+	}
+	return i;
+}
+
+bool isPalindrome(int x) {
+	int n,i;
+	n = getlength(x);
+	if(x < 0)
+		return false;
+	for(i = 0; i < n/2;i++)
+	{
+		if( get(x,i) != get(x,n-i-1))
+			return false;
+	}
+	return true;
+    
+}
+
+int main()
+{
+	int x;
+	scanf("%d",&x);
+//	x = sizeof(int);
+	printf("%d\n",isPalindrome(x));
+//	get(s,a,0);
+//	printf("%s\n",get(s,2));
+//	printf("%d\n",get(x,3));
+//	printf("%d\n", clock());
+//	printf("%d\n",get(2,3,s));
+	return 0;
+}

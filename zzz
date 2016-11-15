@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <string.h>
+#include<time.h>
+#include <malloc.h>
+char* get(char *s,char *a,int position)
+{
+	int i,j,n,k;
+	n = strlen(s);
+	if(position % 2 == 0)
+	{
+		position /= 2;
+		for(i = 1; i < n;i++)
+		{
+			
+			if(s[position - i] != s[position + i] || position - i == -1 || position + i == n)
+			{
+				for(k=0,j = position - i + 1;j < position + i;j++)
+					a[k++] = s[j];
+				a[k] = '\0';
+				break;
+			}
+		}
+	}
+	else
+	{
+		position /= 2;
+		for(i = 0; i < n;i++)
+		{
+			if(s[position - i] != s[position + i + 1] || position - i == -1 || position + i + 1 == n)
+			{
+				for(k=0,j = position - i + 1;j < position + i + 1;j++)
+					a[k++] = s[j];
+				a[k] = '\0';
+				break;
+			}
+		}
+	}
+//	printf("%d times of b is %s\n",position,a);
+	return a;
+
+}
+char* longestPalindrome(char* s) {
+	int i,j,k,n,max = -1;
+	char b[1100];
+	char *a = malloc(sizeof(char) * 1100);
+//	char a[1000];
+//	strcpy(a,get(s,2));
+//	printf("%s\n",a);
+	n = strlen(s);
+	if(n == 1)
+		return s; 
+	n *= 2;
+	for(i = 1;i < n;i++)
+	{
+		
+		strcpy(a,get(s,a,i));
+		k = strlen(a);
+		if(k > max)
+		{
+			max = k;
+			strcpy(b,a);
+
+		}
+	}
+	free(a);
+	strcpy(s,b);
+	return s;
+    
+}
+
+int main()
+{
+	char s[1100];
+//	char a[1000];
+	gets(s);
+	printf("%s\n",longestPalindrome(s));
+//	get(s,a,0);
+//	printf("%s\n",get(s,2));
+//	printf("%d\n",strlen(a));
+//	printf("%d\n", clock());
+//	printf("%d\n",get(2,3,s));
+	return 0;
+}
